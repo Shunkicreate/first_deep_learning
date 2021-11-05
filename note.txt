@@ -1,0 +1,79 @@
+初心者お絵描き教室
+processingでお絵描きしてみよう
+http://www.musashinodenpa.com/p5/
+
+流れ
+1, 環境構築
+https://processing.org/download
+ここのwin-64版をクリックしてzipファイルをダウンロード
+zipファイルを解凍
+解凍したファイルの中のprocessing.exeをクリック
+警告が出るかもしれないですが，詳細を表示させて実行する
+processingのプロジェクトが立ち上がる．
+
+2, ウィンドウの表示
+void setup(){
+  width=800;
+  height=400;
+}
+void draw(){
+
+}
+3, 円を描く(関数のピックアップ)
+座標の説明
+void setup(){
+  width=800;
+  height=400;
+}
+void draw(){
+  ellipse(width/2,height/2,20,20);
+}
+
+4, 円を動かす(変数の説明)
+int, float, boolean, Stringなどのデータの型がある．名前と型名を宣言して変数を作る．変数は名前の通り，値の変更可能．{}で囲まれた中でしか使えない．
+5, setup, drawの説明
+基本的にプログラミングは上から一行ずつ下へ実行していく．
+setupは最初に一度だけ実行される．初期設定．drawはsetupが実行された後に実行される．drawが一番下の行まで実行されるとまたdrawの最初に戻って繰り返される．
+6, 算術演算子
+カッコ	()	a * (b + c)
+単項	++ -- !	a++ --b !c
+乗除	* / %	a * b
+加減	+ -	a + b
+関係	> < <= >=	if (a > b)
+等号	== !=	if (a == b)
+論理積	&&	if (mousePressed && (a > b))
+論理和	||	if (mousePressed || (a > b))
+代入	= += -= *= /= %=	a = 44
+
+7, if文を使ってみる
+void setup(){
+  width=800;
+  height=400;
+}
+int x=0
+void draw(){
+  ellipse(x,height/2,20,20);
+  x++;
+  if(x>width/2){
+    x=0;
+  }
+}
+7, for文を使ってみる
+void setup(){
+  width=800;
+  height=400;
+}
+int x=0
+void draw(){
+  for(int i=0;i<5;i++){
+    ellipse(x,i*20,20,20);
+  }
+  ellipse(x,height/2,20,20);
+  x++;
+  if(x>width/2){
+    x=0;
+  }
+}
+ここからは余裕があれば，，，
+8, 配列の説明
+9, 関数の説明(型宣言，返り値，スコープ)
