@@ -12,28 +12,45 @@ zipファイルを解凍
 processingのプロジェクトが立ち上がる．
 
 2, ウィンドウの表示
-void setup(){
-  width=800;
-  height=400;
-}
-void draw(){
+size(800,400);
 
-}
 3, 円を描く(関数のピックアップ)
 座標の説明
-void setup(){
-  width=800;
-  height=400;
-}
-void draw(){
-  ellipse(width/2,height/2,20,20);
-}
+size(800,400);
+ellipse(400,200,50,50);
 
 4, 円を動かす(変数の説明)
 int, float, boolean, Stringなどのデータの型がある．名前と型名を宣言して変数を作る．変数は名前の通り，値の変更可能．{}で囲まれた中でしか使えない．
+
+void setup(){
+  size(800,400);
+}
+
+int x=0;
+void draw(){
+  ellipse(x,height/2,100,100);
+  x++;
+}
+
+void setup(){
+  size(800,400);
+}
+
+void draw(){
+  background(103);
+  if(mousePressed){
+    fill(0);
+  }
+  else{
+    fill(255);
+  }
+  ellipse(mouseX,mouseY,100,100);
+
+}
 5, setup, drawの説明
 基本的にプログラミングは上から一行ずつ下へ実行していく．
 setupは最初に一度だけ実行される．初期設定．drawはsetupが実行された後に実行される．drawが一番下の行まで実行されるとまたdrawの最初に戻って繰り返される．
+
 6, 算術演算子
 カッコ	()	a * (b + c)
 単項	++ -- !	a++ --b !c
@@ -44,29 +61,43 @@ setupは最初に一度だけ実行される．初期設定．drawはsetupが実
 論理積	&&	if (mousePressed && (a > b))
 論理和	||	if (mousePressed || (a > b))
 代入	= += -= *= /= %=	a = 44
+print(1+1);
+print("\n");
+print(1-1);
+print("\n");
+print(2*2);
+print("\n");
+print(2/2);
+print("\n");
+print(2%2);
+print("\n");
+print(!6);
+print("\n");
 
 7, if文を使ってみる
 void setup(){
-  width=800;
-  height=400;
+  size(800,400);
 }
-int x=0
+int x=0;
 void draw(){
+  background(255);
+  fill(255,0,0);
   ellipse(x,height/2,20,20);
   x++;
   if(x>width/2){
     x=0;
   }
 }
+
 7, for文を使ってみる
 void setup(){
-  width=800;
-  height=400;
+  size(800,400);
+
 }
-int x=0
+int x=0;
 void draw(){
   for(int i=0;i<5;i++){
-    ellipse(x,i*20,20,20);
+    ellipse(x,i*50,20,20);
   }
   ellipse(x,height/2,20,20);
   x++;
@@ -76,4 +107,92 @@ void draw(){
 }
 ここからは余裕があれば，，，
 8, 配列の説明
+int[] list = {100,200,300,400,500};
+void setup(){
+  size(800,400);
+
+}
+int x=0;
+void draw(){
+  ellipse(list[0],height/2,100,100);
+  ellipse(list[1],height/2,100,100);
+  ellipse(list[2],height/2,100,100);
+  ellipse(list[3],height/2,100,100);
+  ellipse(list[4],height/2,100,100);
+}
+
+int[] list = {100,200,300,400,500};
+void setup(){
+  size(800,400);
+
+}
+int x=0;
+void draw(){
+  for(int i=0;i<list.length;i++){
+    ellipse(list[i],height/2,100,100);
+  }
+}
+
+
 9, 関数の説明(型宣言，返り値，スコープ)
+
+void setup(){
+  size(800,400);
+}
+int x=0;
+int move_x(int x){
+  x+=2;
+  return x;
+}
+void draw(){
+  ellipse(x,height/2,100,100);
+  x=move_x(x);
+  
+}
+
+
+作ってみたやつ
+float[] speedx={random(-5,5),random(-5,5),random(-5,5),random(-5,5)};
+float[] speedy={random(-5,5),random(-5,5),random(-5,5),random(-5,5)};
+float[] x={200,600,600,200};
+float[] y={100,100,300,300};
+int time=0;
+int max_speed=15;
+void setup(){
+  size(800,400);
+}
+float change_vec(float s, int type,float place){
+  if(type==0){
+    if(place<0||place>width){
+      s=-s/abs(s)*(random(0,max_speed));
+    } 
+  }
+  else if(type==1){
+    if(place<0||place>height){
+      s=-s/abs(s)*(random(0,max_speed));
+    } 
+  }
+  return s;
+}
+
+int new_time(int time){
+  time++;
+  if(time%60==0){
+    fill(random(0,255),random(0,255),random(0,255));
+  }
+  return time;
+}
+void draw(){
+  background(0);
+
+  quad(x[0],y[0],x[1],y[1],x[2],y[2],x[3],y[3]);
+  for(int i=0;i<x.length;i++){
+    speedx[i]=change_vec(speedx[i],0,x[i]);
+    speedy[i]=change_vec(speedy[i],1,y[i]);
+    x[i]=x[i]+speedx[i];
+    y[i]=y[i]+speedy[i];
+  }
+  time=new_time(time);
+
+  
+}
